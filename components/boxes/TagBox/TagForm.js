@@ -72,17 +72,17 @@ const TagForm = React.createClass({
     }
   },
 
-  clickCandidateTagFuncs: {},
   handleClickCandidateTag(tag) {
-    if (!(tag in this.clickCandidateTagFuncs)) {
+    console.log(this.state);
+    if (!(tag in this.state.clickCandidateTagFuncs)) {
       const func = () => {
         this._content.value = tag;
         this.setState({isShowCandidateTags: false, candidateTag: -1});
       };
-      this.clickCandidateTagFuncs[tag] = func;
+      this.state.clickCandidateTagFuncs[tag] = func;
       return func;
     }
-    return this.clickCandidateTagFuncs[tag];
+    return this.state.clickCandidateTagFuncs[tag];
   },
 
   handleClickShowForm() {
@@ -103,7 +103,8 @@ const TagForm = React.createClass({
     return {
       isEditMode: false,
       isShowCandidateTags: false,
-      candidateTag: -1
+      candidateTag: -1,
+      clickCandidateTagFuncs: {}
     };
   },
 
