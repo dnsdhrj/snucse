@@ -73,13 +73,17 @@ const TagForm = React.createClass({
   },
 
   handleClickCandidateTag(tag) {
-    console.log(this.state);
     if (!(tag in this.state.clickCandidateTagFuncs)) {
       const func = () => {
         this._content.value = tag;
         this.setState({isShowCandidateTags: false, candidateTag: -1});
       };
-      this.state.clickCandidateTagFuncs[tag] = func;
+      this.setState({
+        clickCandidateTagFuncs: {
+          ...this.state.clickCandidateTagFuncs,
+          [tag]: func
+        }
+      });
       return func;
     }
     return this.state.clickCandidateTagFuncs[tag];
